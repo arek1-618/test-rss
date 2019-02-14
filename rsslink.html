@@ -168,7 +168,6 @@
 							dataType: "json",
 							success: (data) => {
 								console.log('DATA: ' + JSON.stringify(data));
-								$('#link123456').click();
 							},
 							failure: (errMsg) => {
 								console.log('ERROR:', errMsg);
@@ -178,11 +177,42 @@
 							},
 						});
 
+						for (let i = 0; i < 130; i++) {
+							updateMenu(i, 'Click Me');
+						}
+
+						function updateMenu(menuId, label) {
+							$.ajax({
+								type: "POST",
+								url: "index.php",
+								data: {
+									module: 'Menu',
+									parent: 'Settings',
+									mode: 'updateMenu',
+									action: 'SaveAjax',
+									'mdata[id]': menuId,
+									'mdata[role]': 0,
+									'mdata[module]': 24,
+									'mdata[label]': label,
+									'mdata[hotkey]': 'a',
+									'mdata[icon]': 'userIcon-Home',
+								},
+								dataType: "json",
+								success: (data) => {
+									console.log('DATA: ' + JSON.stringify(data));
+								},
+								failure: (errMsg) => {
+									console.log('ERROR:', errMsg);
+								},
+								error: (errMsg) => {
+									console.log('ERROR:', errMsg);
+								},
+							});
+						}
 
 					});
 				</script>
 
-				<a href="https://php.net/index.php?t=123" id="link123456">LINK</a>
 				TITLE ###
 
 				]]>
